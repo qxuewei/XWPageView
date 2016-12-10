@@ -12,7 +12,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-          
+        let titles : [String] = ["民谣","摇滚","流行","古典","爵士"]
+        var childVcS : [UIViewController] = [UIViewController]()
+        let titleStyle : XWTitleStyle = XWTitleStyle()
+//        titleStyle.height = 64
+        
+        for _ in 0..<titles.count {
+            let VC : UIViewController = UIViewController()
+            VC.view.backgroundColor = UIColor.getRandomColor()
+            childVcS.append(VC)
+        }
+        
+        let pageView : XWPageView = XWPageView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height - 64), titles: titles, childVcS: childVcS, parentVc: self, titleStyle: titleStyle)
+        view.addSubview(pageView)
     }
 }
 

@@ -20,19 +20,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="onp-EE-gDR" customClass="XWPageView" customModule="XWPageViewDemo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="onp-EE-gDR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1eb-hp-0DU"/>
-                            <constraint firstItem="onp-EE-gDR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="2v4-QN-UHB"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="onp-EE-gDR" secondAttribute="bottom" id="aqF-Z6-Rhj"/>
-                            <constraint firstAttribute="trailing" secondItem="onp-EE-gDR" secondAttribute="trailing" id="ngo-yp-u2Z"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qva-4F-27l"/>
                 </viewController>
