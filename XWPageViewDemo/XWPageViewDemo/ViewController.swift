@@ -12,10 +12,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let titles : [String] = ["民谣","摇滚","流行","古典","爵士"]
+        automaticallyAdjustsScrollViewInsets = false
+//        let titles : [String] = ["民谣","摇滚","流行","古典","爵士"]
+        let titles : [String] = ["民谣","民谣民谣","摇滚哈","流行","古典","爵是士","流行","古典","爵士"]
         var childVcS : [UIViewController] = [UIViewController]()
         let titleStyle : XWTitleStyle = XWTitleStyle()
-//        titleStyle.height = 64
+        titleStyle.isScrollEnable = true
         
         for _ in 0..<titles.count {
             let VC : UIViewController = UIViewController()
@@ -25,6 +27,7 @@ class ViewController: UIViewController {
         
         let pageView : XWPageView = XWPageView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height - 64), titles: titles, childVcS: childVcS, parentVc: self, titleStyle: titleStyle)
         view.addSubview(pageView)
+        view = nil
     }
 }
 

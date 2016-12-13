@@ -10,5 +10,11 @@ import UIKit
 
 class XWTitleStyle {
     var height : CGFloat = 44
+    var nomalColor : UIColor = .black
+    var selecedColor : UIColor = .orange
+    var fontSize : CGFloat = 14.0
+    var isScrollEnable : Bool = false
+    var itemMargin : CGFloat = 30
+    
     
 }
