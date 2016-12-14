@@ -65,3 +65,11 @@ extension XWContentView : UICollectionViewDataSource{
         return cell
     }
 }
+
+extension XWContentView : XWTitleViewDelegate {
+    func titleView(_ titleView: XWTitleView, targetIndex: Int) {
+        print(targetIndex)
+        let indexPath : IndexPath = IndexPath(item: targetIndex, section: 0)
+        collection.scrollToItem(at: indexPath, at: .left, animated: false)
+    }
+}

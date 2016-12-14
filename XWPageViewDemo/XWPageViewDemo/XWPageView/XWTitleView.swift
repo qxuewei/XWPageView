@@ -8,15 +8,20 @@
 
 import UIKit
 
+protocol XWTitleViewDelegate : class {
+    func titleView(_ titleView : XWTitleView, targetIndex : Int)
+}
+
 class XWTitleView: UIView {
+    weak var delegate : XWTitleViewDelegate?
     fileprivate let titles : [String]
     fileprivate var style : XWTitleStyle
+    fileprivate var currentIndex : Int = 0
     fileprivate var titleLBs : [UILabel] =  [UILabel]()
     fileprivate lazy var scrollView : UIScrollView = {
         let scrollView : UIScrollView = UIScrollView(frame: self.bounds)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.scrollsToTop = false
-//        scrollView.bounces = false
         return scrollView
     }()
     init(frame: CGRect, titles : [String], style : XWTitleStyle) {
@@ -44,6 +49,9 @@ extension XWTitleView {
             titleLB.textColor = i == 0 ? style.selecedColor : style.nomalColor
             titleLB.font = UIFont.systemFont(ofSize: style.fontSize)
             titleLB.tag = i
+            let tapGes : UITapGestureRecognizer = UITapGestureRecognizer(target:self , action: #selector(titleLBClick(_:)))
+            titleLB.addGestureRecognizer(tapGes)
+            titleLB.isUserInteractionEnabled = true
             scrollView.addSubview(titleLB)
             titleLBs.append(titleLB)
         }
@@ -63,7 +71,7 @@ extension XWTitleView {
                 titleLB.frame = CGRect(x: X, y: 0, width: W, height: bounds.height)
             }
             
-            scrollView.contentSize = CGSize(width: ((titleLBs.last?.frame.maxX)! + style.itemMargin * 0.5), height: bounds.height)
+            scrollView.contentSize = CGSize(width: ((titleLBs.last?.frame.maxX)! + style.itemMargin * 0.5), height: 0)
         }else{
             W = bounds.width / CGFloat(titles.count)
             for (i,titleLB) in titleLBs.enumerated() {
@@ -72,5 +80,28 @@ extension XWTitleView {
             }
         }
         
+    }
+}
+
+//MARK: - Selector
+extension XWTitleView {
+    @objc fileprivate func titleLBClick(_ tap : UITapGestureRecognizer) {
+        let targetLB : UILabel = tap.view as! UILabel
+        let currentLB : UILabel = titleLBs[currentIndex]
+        currentLB.textColor = style.nomalColor
+        targetLB.textColor = style.selecedColor
+        currentIndex = targetLB.tag
+        delegate?.titleView(self, targetIndex: currentIndex)
+        if style.isScrollEnable {
+            var offsetX : CGFloat = targetLB.center.x - scrollView.bounds.width * 0.5
+            if offsetX < 0 {
+                offsetX = 0.0
+            }
+            let offsetMaxX : CGFloat = scrollView.contentSize.width - scrollView.bounds.width
+            if offsetX > offsetMaxX {
+                offsetX = offsetMaxX
+            }
+            scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
+        }
     }
 }

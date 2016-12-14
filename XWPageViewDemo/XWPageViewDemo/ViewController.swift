@@ -27,7 +27,6 @@ class ViewController: UIViewController {
         
         let pageView : XWPageView = XWPageView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height - 64), titles: titles, childVcS: childVcS, parentVc: self, titleStyle: titleStyle)
         view.addSubview(pageView)
-        view = nil
     }
 }
 
