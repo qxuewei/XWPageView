@@ -47,8 +47,9 @@ extension XWPageView {
     }
     
     private func setUpContentView() {
-        let contentView = XWContentView(frame: CGRect(x: 0, y: titleView.frame.maxY, width: bounds.width, height: (bounds.height - titleView.frame.maxY)), childVcS: self.childVcS,parentVc : parentVc)
+        let contentView : XWContentView = XWContentView(frame: CGRect(x: 0, y: titleView.frame.maxY, width: bounds.width, height: (bounds.height - titleView.frame.maxY)), childVcS: self.childVcS,parentVc : parentVc)
         titleView.delegate = contentView
+        contentView.delegate = titleView
         addSubview(contentView)
     }
 }

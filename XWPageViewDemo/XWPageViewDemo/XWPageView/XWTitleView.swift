@@ -13,6 +13,7 @@ protocol XWTitleViewDelegate : class {
 }
 
 class XWTitleView: UIView {
+    
     weak var delegate : XWTitleViewDelegate?
     fileprivate let titles : [String]
     fileprivate var style : XWTitleStyle
@@ -24,6 +25,7 @@ class XWTitleView: UIView {
         scrollView.scrollsToTop = false
         return scrollView
     }()
+    
     init(frame: CGRect, titles : [String], style : XWTitleStyle) {
         self.titles = titles
         self.style = style
@@ -87,11 +89,19 @@ extension XWTitleView {
 extension XWTitleView {
     @objc fileprivate func titleLBClick(_ tap : UITapGestureRecognizer) {
         let targetLB : UILabel = tap.view as! UILabel
+        adjustTitleLB(targetLB.tag)
+        delegate?.titleView(self, targetIndex: currentIndex)
+    }
+    
+    fileprivate func adjustTitleLB(_ targetIndex : Int) {
+        guard targetIndex != currentIndex else {
+            return
+        }
+        let targetLB : UILabel = titleLBs[targetIndex]
         let currentLB : UILabel = titleLBs[currentIndex]
         currentLB.textColor = style.nomalColor
         targetLB.textColor = style.selecedColor
-        currentIndex = targetLB.tag
-        delegate?.titleView(self, targetIndex: currentIndex)
+        currentIndex = targetIndex
         if style.isScrollEnable {
             var offsetX : CGFloat = targetLB.center.x - scrollView.bounds.width * 0.5
             if offsetX < 0 {
@@ -103,5 +113,14 @@ extension XWTitleView {
             }
             scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
         }
+    }
+}
+
+extension XWTitleView : XWContentViewDelegate {
+    func contentView(_ contentView: XWContentView, targetIndex: Int) {
+        adjustTitleLB(targetIndex)
+    }
+    func contentView(_ contentVuew: XWContentView, targetIndex: Int, progress: CGFloat) {
+        print("targetIndex:\(targetIndex) +++ progress:\(progress)")
     }
 }
