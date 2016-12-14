@@ -52,4 +52,18 @@ extension UIColor {
         return UIColor(R: CGFloat(arc4random_uniform(256)), G: CGFloat(arc4random_uniform(256)), B: CGFloat(arc4random_uniform(256)))
     }
     
+    //MARK: - 返回两RGB传入的颜色差值
+    class func getRGBDelta(oldRGBColor : UIColor, newRGBColor : UIColor) -> (CGFloat,CGFloat,CGFloat) {
+        let RGBCompsOld = oldRGBColor.getRGBComps()
+        let RGBCompsNew = newRGBColor.getRGBComps()
+        return (RGBCompsOld.0 - RGBCompsNew.0,RGBCompsOld.1 - RGBCompsNew.1,RGBCompsOld.2 - RGBCompsNew.2)
+    }
+    
+    //MARK: - 获取颜色RGB
+    func getRGBComps() -> (CGFloat ,CGFloat, CGFloat) {
+        guard let colorComps = cgColor.components else {
+            fatalError("Afferent must RGB Color")
+        }
+        return (colorComps[0] * 255.0, colorComps[1] * 255.0, colorComps[2] * 255.0)
+    }
 }

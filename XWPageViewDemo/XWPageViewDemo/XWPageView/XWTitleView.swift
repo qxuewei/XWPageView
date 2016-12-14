@@ -81,7 +81,6 @@ extension XWTitleView {
                 titleLB.frame = CGRect(x: X, y: 0, width: W, height: bounds.height)
             }
         }
-        
     }
 }
 
@@ -122,5 +121,18 @@ extension XWTitleView : XWContentViewDelegate {
     }
     func contentView(_ contentVuew: XWContentView, targetIndex: Int, progress: CGFloat) {
         print("targetIndex:\(targetIndex) +++ progress:\(progress)")
+        if style.isColorShade {
+            changeTextLBColor(targetIndex: targetIndex, progress: progress)
+        }
+    }
+    private func changeTextLBColor(targetIndex: Int, progress: CGFloat) {
+        let currentLB : UILabel = titleLBs[currentIndex]
+        let targetLB : UILabel = titleLBs[targetIndex]
+        
+        let colorDelta = UIColor.getRGBDelta(oldRGBColor: style.selecedColor, newRGBColor: style.nomalColor)
+        let seletedRGB = style.selecedColor.getRGBComps()
+        let nomalRGB = style.nomalColor.getRGBComps()
+        targetLB.textColor = UIColor(R: nomalRGB.0 + colorDelta.0 * progress, G: nomalRGB.1 + colorDelta.1 * progress, B: nomalRGB.2 + colorDelta.2 * progress)
+        currentLB.textColor = UIColor(R: seletedRGB.0 - colorDelta.0 * progress, G: seletedRGB.1 - colorDelta.1 * progress, B: seletedRGB.2 - colorDelta.2 * progress)
     }
 }
