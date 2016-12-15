@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         var childVcS : [UIViewController] = [UIViewController]()
         let titleStyle : XWTitleStyle = XWTitleStyle()
         titleStyle.isScrollEnable = true
+        titleStyle.isShowScrollLine = true
         
         for _ in 0..<titles.count {
             let VC : UIViewController = UIViewController()

@@ -17,10 +17,6 @@ class XWPageView: UIView {
     fileprivate var titleStyle : XWTitleStyle
     fileprivate var titleView : XWTitleView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     init(frame : CGRect, titles : [String], childVcS : [UIViewController], parentVc : UIViewController, titleStyle : XWTitleStyle) {
         self.titles = titles
         self.childVcS = childVcS

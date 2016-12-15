@@ -16,5 +16,8 @@ class XWTitleStyle {
     var isScrollEnable : Bool = false
     var itemMargin : CGFloat = 30.0
     var isColorShade : Bool = true
+    var isShowScrollLine : Bool = false
+    var scrollLineHeight : CGFloat = 2.0
+    var scrollLineColor : UIColor = .orange
     
 }

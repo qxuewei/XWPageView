@@ -19,11 +19,19 @@ class XWTitleView: UIView {
     fileprivate var style : XWTitleStyle
     fileprivate var currentIndex : Int = 0
     fileprivate var titleLBs : [UILabel] =  [UILabel]()
+    
     fileprivate lazy var scrollView : UIScrollView = {
         let scrollView : UIScrollView = UIScrollView(frame: self.bounds)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.scrollsToTop = false
         return scrollView
+    }()
+    fileprivate lazy var scrollLine : UIView = {
+        let line = UIView()
+        line.backgroundColor = self.style.scrollLineColor
+        line.frame.origin.y = self.bounds.height - self.style.scrollLineHeight
+        line.frame.size.height = self.style.scrollLineHeight
+        return line
     }()
     
     init(frame: CGRect, titles : [String], style : XWTitleStyle) {
@@ -39,9 +47,13 @@ class XWTitleView: UIView {
 
 extension XWTitleView {
     fileprivate func setUpUI() {
+        
         addSubview(scrollView)
         setUpTitleLBS()
         setUpTitleLBFrame()
+        if style.isShowScrollLine {
+            scrollView.addSubview(scrollLine)
+        }
     }
     fileprivate func setUpTitleLBS() {
         for (i,title) in titles.enumerated() {
@@ -67,6 +79,10 @@ extension XWTitleView {
                 W = (titles[i] as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 0), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName : titleLB.font] , context: nil).width
                 if i == 0 {
                     X = style.itemMargin * 0.5
+                    if style.isShowScrollLine {
+                        scrollLine.frame.origin.x = X
+                        scrollLine.frame.size.width = W
+                    }
                 }else{
                     X = titleLBs[i - 1].frame.maxX + style.itemMargin
                 }
@@ -80,6 +96,10 @@ extension XWTitleView {
                 X = W * CGFloat(i)
                 titleLB.frame = CGRect(x: X, y: 0, width: W, height: bounds.height)
             }
+            if style.isShowScrollLine {
+                scrollLine.frame.origin.x = 0
+                scrollLine.frame.size.width = W
+            }
         }
     }
 }
@@ -89,9 +109,17 @@ extension XWTitleView {
     @objc fileprivate func titleLBClick(_ tap : UITapGestureRecognizer) {
         let targetLB : UILabel = tap.view as! UILabel
         adjustTitleLB(targetLB.tag)
+        if style.isShowScrollLine {
+            adjustScrollLine(targetLB)
+        }
         delegate?.titleView(self, targetIndex: currentIndex)
     }
-    
+    private func adjustScrollLine(_ targetLB : UILabel) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.scrollLine.frame.origin.x = targetLB.frame.origin.x
+            self.scrollLine.frame.size.width = targetLB.frame.size.width
+        })
+    }
     fileprivate func adjustTitleLB(_ targetIndex : Int) {
         guard targetIndex != currentIndex else {
             return
@@ -120,19 +148,29 @@ extension XWTitleView : XWContentViewDelegate {
         adjustTitleLB(targetIndex)
     }
     func contentView(_ contentVuew: XWContentView, targetIndex: Int, progress: CGFloat) {
-        print("targetIndex:\(targetIndex) +++ progress:\(progress)")
+        //print("targetIndex:\(targetIndex) +++ progress:\(progress)")
         if style.isColorShade {
             changeTextLBColor(targetIndex: targetIndex, progress: progress)
+        }
+        if style.isShowScrollLine {
+            changeScrollLinePosition(targetIndex: targetIndex, progress: progress)
         }
     }
     private func changeTextLBColor(targetIndex: Int, progress: CGFloat) {
         let currentLB : UILabel = titleLBs[currentIndex]
         let targetLB : UILabel = titleLBs[targetIndex]
-        
         let colorDelta = UIColor.getRGBDelta(oldRGBColor: style.selecedColor, newRGBColor: style.nomalColor)
         let seletedRGB = style.selecedColor.getRGBComps()
         let nomalRGB = style.nomalColor.getRGBComps()
         targetLB.textColor = UIColor(R: nomalRGB.0 + colorDelta.0 * progress, G: nomalRGB.1 + colorDelta.1 * progress, B: nomalRGB.2 + colorDelta.2 * progress)
         currentLB.textColor = UIColor(R: seletedRGB.0 - colorDelta.0 * progress, G: seletedRGB.1 - colorDelta.1 * progress, B: seletedRGB.2 - colorDelta.2 * progress)
+    }
+    private func changeScrollLinePosition(targetIndex: Int, progress: CGFloat) {
+        let currentLB : UILabel = titleLBs[currentIndex]
+        let targetLB : UILabel = titleLBs[targetIndex]
+        let WDelta : CGFloat = targetLB.bounds.width - currentLB.bounds.width
+        let XDelta : CGFloat = targetLB.frame.origin.x - currentLB.frame.origin.x
+        scrollLine.frame.size.width = currentLB.bounds.width + WDelta * progress
+        scrollLine.frame.origin.x = currentLB.frame.origin.x + XDelta * progress
     }
 }

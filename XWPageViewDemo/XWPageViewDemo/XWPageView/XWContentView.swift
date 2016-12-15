@@ -20,6 +20,7 @@ class XWContentView: UIView {
     fileprivate let parentVc : UIViewController
     fileprivate let CellID = "kCollectionCellID"
     fileprivate var startOffsetX : CGFloat = 0
+    fileprivate var isForbidScroll : Bool = false
     
     fileprivate lazy var collection : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -86,20 +87,18 @@ extension XWContentView : UICollectionViewDelegate {
         }
     }
     private func contentEndScroll() {
-        guard let delegate = delegate else {
+        guard let delegate = delegate , !isForbidScroll else {
             return
         }
         delegate.contentView(self, targetIndex: Int(collection.contentOffset.x / collection.bounds.width))
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isForbidScroll = false
         startOffsetX = scrollView.contentOffset.x
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffsetX : CGFloat = scrollView.contentOffset.x
-        guard currentOffsetX != startOffsetX else {
-            return
-        }
-        guard let delegate = delegate else {
+        guard currentOffsetX != startOffsetX , !isForbidScroll , let delegate = delegate else {
             return
         }
         var targetIndex : Int = 0
@@ -124,6 +123,7 @@ extension XWContentView : UICollectionViewDelegate {
 
 extension XWContentView : XWTitleViewDelegate {
     func titleView(_ titleView: XWTitleView, targetIndex: Int) {
+        isForbidScroll = true
         let indexPath : IndexPath = IndexPath(item: targetIndex, section: 0)
         collection.scrollToItem(at: indexPath, at: .left, animated: false)
     }
