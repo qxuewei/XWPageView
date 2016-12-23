@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E103A301DFB748B0032169B /* XWTitleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E103A2F1DFB748B0032169B /* XWTitleStyle.swift */; };
+		2E1B7A091E0D227600505217 /* UIColor_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1B7A081E0D227600505217 /* UIColor_Extension.swift */; };
 		2E791CE01DFAAE8F007DA591 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E791CDF1DFAAE8F007DA591 /* AppDelegate.swift */; };
 		2E791CE21DFAAE8F007DA591 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E791CE11DFAAE8F007DA591 /* ViewController.swift */; };
 		2E791CE51DFAAE8F007DA591 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E791CE31DFAAE8F007DA591 /* Main.storyboard */; };
@@ -16,11 +17,11 @@
 		2E791CF31DFAAFAD007DA591 /* XWPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E791CF21DFAAFAD007DA591 /* XWPageView.swift */; };
 		2E791CF51DFAAFC7007DA591 /* XWTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E791CF41DFAAFC7007DA591 /* XWTitleView.swift */; };
 		2E791CF71DFAAFE9007DA591 /* XWContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E791CF61DFAAFE9007DA591 /* XWContentView.swift */; };
-		2E791CF91DFAB11B007DA591 /* UIColor_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E791CF81DFAB11B007DA591 /* UIColor_Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E103A2F1DFB748B0032169B /* XWTitleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XWTitleStyle.swift; sourceTree = "<group>"; };
+		2E1B7A081E0D227600505217 /* UIColor_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor_Extension.swift; sourceTree = "<group>"; };
 		2E791CDC1DFAAE8F007DA591 /* XWPageViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XWPageViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E791CDF1DFAAE8F007DA591 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E791CE11DFAAE8F007DA591 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,7 +32,6 @@
 		2E791CF21DFAAFAD007DA591 /* XWPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XWPageView.swift; sourceTree = "<group>"; };
 		2E791CF41DFAAFC7007DA591 /* XWTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XWTitleView.swift; sourceTree = "<group>"; };
 		2E791CF61DFAAFE9007DA591 /* XWContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XWContentView.swift; sourceTree = "<group>"; };
-		2E791CF81DFAB11B007DA591 /* UIColor_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor_Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,6 @@
 				2E791CE61DFAAE8F007DA591 /* Assets.xcassets */,
 				2E791CE81DFAAE8F007DA591 /* LaunchScreen.storyboard */,
 				2E791CEB1DFAAE8F007DA591 /* Info.plist */,
-				2E791CF81DFAB11B007DA591 /* UIColor_Extension.swift */,
 			);
 			path = XWPageViewDemo;
 			sourceTree = "<group>";
@@ -79,6 +78,7 @@
 		2E791CF11DFAAEB7007DA591 /* XWPageView */ = {
 			isa = PBXGroup;
 			children = (
+				2E1B7A081E0D227600505217 /* UIColor_Extension.swift */,
 				2E791CF21DFAAFAD007DA591 /* XWPageView.swift */,
 				2E791CF41DFAAFC7007DA591 /* XWTitleView.swift */,
 				2E791CF61DFAAFE9007DA591 /* XWContentView.swift */,
@@ -164,10 +164,10 @@
 				2E791CF51DFAAFC7007DA591 /* XWTitleView.swift in Sources */,
 				2E791CF31DFAAFAD007DA591 /* XWPageView.swift in Sources */,
 				2E103A301DFB748B0032169B /* XWTitleStyle.swift in Sources */,
+				2E1B7A091E0D227600505217 /* UIColor_Extension.swift in Sources */,
 				2E791CE21DFAAE8F007DA591 /* ViewController.swift in Sources */,
 				2E791CF71DFAAFE9007DA591 /* XWContentView.swift in Sources */,
 				2E791CE01DFAAE8F007DA591 /* AppDelegate.swift in Sources */,
-				2E791CF91DFAB11B007DA591 /* UIColor_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
