@@ -82,15 +82,15 @@ extension XWContentView : UICollectionViewDelegate {
         contentEndScroll()
     }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if decelerate == false {
+        if !decelerate {
             contentEndScroll()
         }
     }
     private func contentEndScroll() {
-        guard let delegate = delegate , !isForbidScroll else {
+        guard (delegate != nil) && !isForbidScroll else {
             return
         }
-        delegate.contentView(self, targetIndex: Int(collection.contentOffset.x / collection.bounds.width))
+        delegate?.contentView(self, targetIndex: Int(collection.contentOffset.x / collection.bounds.width))
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isForbidScroll = false
@@ -103,20 +103,23 @@ extension XWContentView : UICollectionViewDelegate {
         }
         var targetIndex : Int = 0
         var progress : CGFloat = 0.0
-        let collectionWidth = collection.bounds.width
-        if startOffsetX < currentOffsetX {
-            targetIndex = Int(startOffsetX / collectionWidth) + 1
-            if targetIndex > childVcS.count {
-                targetIndex = childVcS.count
+        
+        //左滑
+        if scrollView.contentOffset.x > startOffsetX {
+            targetIndex = Int(startOffsetX / scrollView.bounds.width) + 1
+            if targetIndex >= childVcS.count {
+                targetIndex = childVcS.count - 1
             }
-            progress = (currentOffsetX - startOffsetX) / collectionWidth
+            progress = (scrollView.contentOffset.x - startOffsetX) / scrollView.bounds.width
         }else{
-            targetIndex = Int(startOffsetX / collectionWidth) - 1
+            //右滑
+            targetIndex = Int(startOffsetX / scrollView.bounds.width) - 1
             if targetIndex < 0 {
                 targetIndex = 0
             }
-            progress = (startOffsetX - currentOffsetX) / collectionWidth
+            progress = (startOffsetX - scrollView.contentOffset.x) / scrollView.bounds.width
         }
+        
         delegate.contentView(self, targetIndex: targetIndex, progress: progress)
     }
 }

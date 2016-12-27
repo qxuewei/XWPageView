@@ -16,6 +16,7 @@ class XWPageView: UIView {
     fileprivate var parentVc : UIViewController
     fileprivate var titleStyle : XWTitleStyle
     fileprivate var titleView : XWTitleView!
+    fileprivate var contentView : XWContentView!
     
     init(frame : CGRect, titles : [String], childVcS : [UIViewController], parentVc : UIViewController, titleStyle : XWTitleStyle) {
         self.titles = titles
@@ -33,19 +34,14 @@ class XWPageView: UIView {
 
 extension XWPageView {
     fileprivate func setUpUI() {
-        setUpTitleView()
-        setUpContentView()
-    }
-    
-    private func setUpTitleView() {
+        
         titleView = XWTitleView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: titleStyle.height), titles: self.titles, style : self.titleStyle)
+        contentView = XWContentView(frame: CGRect(x: 0, y: titleView.frame.maxY, width: bounds.width, height: (bounds.height - titleView.frame.maxY)), childVcS: self.childVcS,parentVc : parentVc)
+        
         addSubview(titleView)
-    }
-    
-    private func setUpContentView() {
-        let contentView : XWContentView = XWContentView(frame: CGRect(x: 0, y: titleView.frame.maxY, width: bounds.width, height: (bounds.height - titleView.frame.maxY)), childVcS: self.childVcS,parentVc : parentVc)
+        addSubview(contentView)
+        
         titleView.delegate = contentView
         contentView.delegate = titleView
-        addSubview(contentView)
     }
 }
