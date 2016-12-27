@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         var childVcS : [UIViewController] = [UIViewController]()
         let titleStyle : XWTitleStyle = XWTitleStyle()
         titleStyle.isScrollEnable = true
-        titleStyle.isShowScrollLine = true
+        titleStyle.isShowBottomLine = true
         
         for _ in 0..<titles.count {
             let VC : UIViewController = UIViewController()
@@ -26,7 +26,8 @@ class ViewController: UIViewController {
             childVcS.append(VC)
         }
         
-        let pageView : XWPageView = XWPageView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height - 64), titles: titles, childVcS: childVcS, parentVc: self, titleStyle: titleStyle)
+        
+        let pageView : XWPageView = XWPageView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height - 64), titles: titles, style: titleStyle, childVcs: childVcS, parentVc: self)
         view.addSubview(pageView)
     }
 }

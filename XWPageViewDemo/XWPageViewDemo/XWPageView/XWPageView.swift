@@ -10,21 +10,27 @@ import UIKit
 
 class XWPageView: UIView {
     
-    //MARK: - 自定义属性
-    fileprivate var titles : [String]
-    fileprivate var childVcS : [UIViewController]
-    fileprivate var parentVc : UIViewController
-    fileprivate var titleStyle : XWTitleStyle
+    // MARK: 定义属性
+    fileprivate var titles : [String]!
+    fileprivate var style : XWTitleStyle!
+    fileprivate var childVcs : [UIViewController]!
+    fileprivate weak var parentVc : UIViewController!
+    
     fileprivate var titleView : XWTitleView!
     fileprivate var contentView : XWContentView!
     
-    init(frame : CGRect, titles : [String], childVcS : [UIViewController], parentVc : UIViewController, titleStyle : XWTitleStyle) {
-        self.titles = titles
-        self.childVcS = childVcS
-        self.parentVc = parentVc
-        self.titleStyle = titleStyle
+    // MARK: 自定义构造函数
+    init(frame: CGRect, titles : [String], style : XWTitleStyle, childVcs : [UIViewController], parentVc : UIViewController) {
         super.init(frame: frame)
-        setUpUI()
+        
+        assert(titles.count == childVcs.count, "标题&控制器个数不同,请检测!!!")
+        self.style = style
+        self.titles = titles
+        self.childVcs = childVcs
+        self.parentVc = parentVc
+        parentVc.automaticallyAdjustsScrollViewInsets = false
+        
+        setupUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,16 +38,40 @@ class XWPageView: UIView {
     }
 }
 
+
+// MARK:- 设置界面内容
 extension XWPageView {
-    fileprivate func setUpUI() {
-        
-        titleView = XWTitleView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: titleStyle.height), titles: self.titles, style : self.titleStyle)
-        contentView = XWContentView(frame: CGRect(x: 0, y: titleView.frame.maxY, width: bounds.width, height: (bounds.height - titleView.frame.maxY)), childVcS: self.childVcS,parentVc : parentVc)
-        
+    fileprivate func setupUI() {
+        let titleH : CGFloat = 44
+        let titleFrame = CGRect(x: 0, y: 0, width: frame.width, height: titleH)
+        titleView = XWTitleView(frame: titleFrame, titles: titles, style : style)
+        titleView.delegate = self
         addSubview(titleView)
-        addSubview(contentView)
         
-        titleView.delegate = contentView
-        contentView.delegate = titleView
+        let contentFrame = CGRect(x: 0, y: titleH, width: frame.width, height: frame.height - titleH)
+        contentView = XWContentView(frame: contentFrame, childVcs: childVcs, parentViewController: parentVc)
+        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        contentView.delegate = self
+        addSubview(contentView)
+    }
+}
+
+
+// MARK:- 设置XWContentView的代理
+extension XWPageView : XWContentViewDelegate {
+    func contentView(_ contentView: XWContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
+        titleView.setTitleWithProgress(progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
+    }
+    
+    func contentViewEndScroll(_ contentView: XWContentView) {
+        titleView.contentViewDidEndScroll()
+    }
+}
+
+
+// MARK:- 设置XWTitleView的代理
+extension XWPageView : XWTitleViewDelegate {
+    func titleView(_ titleView: XWTitleView, selectedIndex index: Int) {
+        contentView.setCurrentIndex(index)
     }
 }
