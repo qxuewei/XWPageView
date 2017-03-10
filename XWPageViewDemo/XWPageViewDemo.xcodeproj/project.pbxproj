@@ -17,6 +17,7 @@
 		2E791CE51DFAAE8F007DA591 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E791CE31DFAAE8F007DA591 /* Main.storyboard */; };
 		2E791CE71DFAAE8F007DA591 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E791CE61DFAAE8F007DA591 /* Assets.xcassets */; };
 		2E791CEA1DFAAE8F007DA591 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E791CE81DFAAE8F007DA591 /* LaunchScreen.storyboard */; };
+		2EA399001E7291CF004DD05F /* TwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA398FF1E7291CF004DD05F /* TwoVC.swift */; };
 		2EDF31AD1E1B7F1B003B52AB /* XWPageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF31AC1E1B7F1B003B52AB /* XWPageCollectionView.swift */; };
 		2EDF31AF1E1B933F003B52AB /* XWPageCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF31AE1E1B933F003B52AB /* XWPageCollectionLayout.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		2E791CE61DFAAE8F007DA591 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E791CE91DFAAE8F007DA591 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E791CEB1DFAAE8F007DA591 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EA398FF1E7291CF004DD05F /* TwoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoVC.swift; sourceTree = "<group>"; };
 		2EDF31AC1E1B7F1B003B52AB /* XWPageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XWPageCollectionView.swift; sourceTree = "<group>"; };
 		2EDF31AE1E1B933F003B52AB /* XWPageCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XWPageCollectionLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 				2E23C1321E126111002A5514 /* XWPageView */,
 				2E791CDF1DFAAE8F007DA591 /* AppDelegate.swift */,
 				2E791CE11DFAAE8F007DA591 /* ViewController.swift */,
+				2EA398FF1E7291CF004DD05F /* TwoVC.swift */,
 				2E791CE31DFAAE8F007DA591 /* Main.storyboard */,
 				2E791CE61DFAAE8F007DA591 /* Assets.xcassets */,
 				2E791CE81DFAAE8F007DA591 /* LaunchScreen.storyboard */,
@@ -176,6 +179,7 @@
 				2E23C13B1E126111002A5514 /* XWTitleStyle.swift in Sources */,
 				2E23C1381E126111002A5514 /* UIColor_Extension.swift in Sources */,
 				2E23C1391E126111002A5514 /* XWContentView.swift in Sources */,
+				2EA399001E7291CF004DD05F /* TwoVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

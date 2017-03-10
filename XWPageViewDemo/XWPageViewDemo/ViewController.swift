@@ -50,7 +50,8 @@ class ViewController: UIViewController {
         layout.minimumLineSpacing = 10
 //        layout.cols = 7
 //        layout.rows = 3
-        let pageCollectionView : XWPageCollectionView = XWPageCollectionView(frame: CGRect(x: 0, y: 350, width: view.bounds.width, height: 300), titles: titles, style: stytle, isTitleInTop: true, layout: layout,parentVC : self)
+        let pageCollectionView : XWPageCollectionView = XWPageCollectionView(frame: CGRect(x: 0, y: 250, width: view.bounds.width, height: 300), titles: titles, style: stytle, isTitleInTop: true, layout: layout)
+        automaticallyAdjustsScrollViewInsets = false
         pageCollectionView.dataSource = self
         pageCollectionView.register(cellClass: UICollectionViewCell.self, forCellWithReuseIdentifier: kCollectionViewCellID)
         view.addSubview(pageCollectionView)

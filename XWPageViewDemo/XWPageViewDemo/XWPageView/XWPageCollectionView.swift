@@ -27,12 +27,12 @@ class XWPageCollectionView: UIView {
     fileprivate var pageControl : UIPageControl!
     fileprivate var currentIndexPath : IndexPath = IndexPath(item: 0, section: 0)
     
-    init(frame: CGRect, titles : [String], style : XWTitleStyle, isTitleInTop : Bool, layout : XWPageCollectionLayout, parentVC : UIViewController) {
+    init(frame: CGRect, titles : [String], style : XWTitleStyle, isTitleInTop : Bool, layout : XWPageCollectionLayout) {
         self.isTitleInTop = isTitleInTop
         self.style = style
         self.titles = titles
         self.layout = layout
-        parentVC.automaticallyAdjustsScrollViewInsets = false
+//        parentVC.automaticallyAdjustsScrollViewInsets = false
         super.init(frame: frame)
         setUpUI()
     }
@@ -47,6 +47,9 @@ extension XWPageCollectionView {
     }
     func register(nib: UINib?, forCellWithReuseIdentifier: String) {
         collectionView.register(nib, forCellWithReuseIdentifier: forCellWithReuseIdentifier)
+    }
+    func reloadData() {
+        collectionView.reloadData()
     }
 }
 
